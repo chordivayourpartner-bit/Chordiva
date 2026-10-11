@@ -1,0 +1,84 @@
+<!doctype html>
+<html lang="id">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#101713">
+  <meta name="description" content="Cari chord gitar lagu favoritmu dengan mudah di Chordiva.">
+  <title>Chordiva — Cari chord lagu favoritmu</title>
+  <link rel="icon" type="image/svg+xml" href="favicon.svg">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <header class="topbar">
+    <a class="brand" href="#" aria-label="Chordiva beranda">
+      <span class="brand-mark" aria-hidden="true">C<span>♪</span></span>
+      <span>Chordiva</span>
+    </a>
+    <a class="top-link" href="#cara-kerja">Tentang</a>
+  </header>
+
+  <main>
+    <section class="hero">
+      <div class="eyebrow"><span class="pulse"></span> TEMUKAN LAGU, MULAI BERMAIN</div>
+      <h1>Chord lagu favoritmu.<br><span>Dalam satu pencarian.</span></h1>
+      <p class="hero-copy">Cari lagu, lihat chord, lalu mainkan dengan versimu sendiri.</p>
+      <form class="search-form" id="search-form" role="search">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="10.8" cy="10.8" r="6.8"></circle><path d="m16 16 5 5"></path></svg>
+        <input id="search-input" type="search" placeholder="Cari judul lagu atau nama artis..." autocomplete="off" aria-label="Cari judul lagu atau nama artis">
+        <button type="submit">Cari lagu <span aria-hidden="true">↗</span></button>
+      </form>
+      <div class="search-hint">Coba: <button class="suggestion" data-query="Komang">Komang</button><span>·</span><button class="suggestion" data-query="Tulus">Tulus</button><span>·</span><button class="suggestion" data-query="Hati-Hati di Jalan">Hati-Hati di Jalan</button></div>
+    </section>
+
+    <section class="results-section" id="hasil">
+      <div class="section-heading">
+        <div><p class="section-kicker">MULAI DARI SINI</p><h2 id="results-title">Lagu pilihan</h2></div>
+        <span class="result-count" id="result-count">6 lagu contoh</span>
+      </div>
+      <div class="song-grid" id="song-grid" aria-live="polite"></div>
+      <div class="empty-state hidden" id="empty-state">
+        <div class="empty-icon">⌕</div><h3>Lagu belum ditemukan</h3>
+        <p>Coba kata kunci lain, misalnya judul lagu atau nama artis.</p>
+        <button class="text-button" id="reset-search">Tampilkan semua lagu</button>
+      </div>
+    </section>
+
+    <section class="how-section" id="cara-kerja">
+      <div><p class="section-kicker">SIMPLE BY DESIGN</p><h2>Lebih sedikit mencari.<br><span>Lebih banyak bermain.</span></h2></div>
+      <div class="how-points">
+        <article><span class="point-number">01</span><div><h3>Cari lagu</h3><p>Ketik judul atau artis untuk menemukan lagu yang kamu inginkan.</p></div></article>
+        <article><span class="point-number">02</span><div><h3>Atur chord</h3><p>Naikkan atau turunkan nada agar nyaman dengan suaramu.</p></div></article>
+        <article><span class="point-number">03</span><div><h3>Mainkan</h3><p>Baca chord dengan tampilan bersih yang nyaman dilihat.</p></div></article>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <a class="brand footer-brand" href="#"><span class="brand-mark" aria-hidden="true">C<span>♪</span></span><span>Chordiva</span></a>
+    <p>Temukan lagu. Mainkan ceritamu.</p>
+    <span class="copyright">© <span id="year"></span> Chordiva</span>
+  </footer>
+
+  <dialog class="song-dialog" id="song-dialog" aria-labelledby="dialog-title">
+    <div class="dialog-header">
+      <button class="icon-button back-button" id="close-dialog" aria-label="Tutup detail lagu">← <span>Kembali</span></button>
+      <button class="icon-button close-button" id="close-x" aria-label="Tutup">×</button>
+    </div>
+    <div class="song-detail">
+      <div class="detail-meta"><span class="detail-tag">CHORD GITAR</span><span id="detail-artist"></span></div>
+      <h2 id="dialog-title">Judul lagu</h2>
+      <p class="detail-subtitle">Gunakan kontrol nada untuk menyesuaikan chord.</p>
+      <div class="chord-tools">
+        <div><span class="tool-label">TRANSPOSISI</span><div class="transpose-controls"><button id="transpose-down" aria-label="Turunkan nada">−</button><span id="transpose-value">Nada asli</span><button id="transpose-up" aria-label="Naikkan nada">+</button><button id="transpose-reset" class="reset-button">Reset</button></div></div>
+        <button class="tool-button" id="copy-chords">Salin chord</button>
+      </div>
+      <div class="chord-legend"><span class="chord-dot"></span> Chord ditandai dengan warna hijau</div>
+      <pre class="lyrics" id="lyrics-content"></pre>
+      <p class="demo-note">Catatan: lagu dan chord di halaman demo ini adalah contoh. Sebelum dipublikasikan, pastikan data lagu, chord, dan lirik yang digunakan boleh ditampilkan atau telah memperoleh izin yang diperlukan.</p>
+    </div>
+  </dialog>
+  <div class="toast" id="toast" role="status" aria-live="polite"></div>
+  <script src="script.js"></script>
+</body>
+</html>
