@@ -1,55 +1,73 @@
 # Chordiva
 
-Website sederhana untuk mencari chord lagu, dibuat menggunakan HTML, CSS, dan JavaScript murni. Tidak membutuhkan framework, instalasi package, atau backend untuk menjalankan demo.
+Website sederhana untuk mencari chord lagu, dibuat dengan HTML, CSS, dan JavaScript murni. Tidak butuh framework, instalasi package, atau backend.
 
-## Fitur demo
-- Pencarian judul lagu dan nama artis
-- Daftar hasil pencarian yang responsif
-- Halaman detail chord dalam dialog
-- Transpose chord naik/turun per semitone
-- Salin chord ke clipboard
-- Desain dark mode dengan aksen hijau
-- Favicon SVG
-- Siap dipublikasikan menggunakan GitHub Pages
+## Fitur
+- Pencarian judul/artis yang langsung merespons saat mengetik (tidak peka tanda baca, jadi "hati hati jalan" menemukan "Hati-Hati di Jalan")
+- Detail chord dalam dialog, dibagi per bagian (Intro, Verse, Chorus, dst.)
+- **Transpose** naik/turun per semitone, dengan penulisan # atau b yang menyesuaikan nada
+- **Capo**: geser capo dan chord otomatis menyesuaikan bentuknya
+- **Diagram chord**: ketuk chord untuk melihat posisi jari
+- **Auto-scroll** dengan 5 kecepatan, berhenti otomatis saat layar disentuh
+- Ukuran teks bisa diperbesar/diperkecil
+- Favorit (tersimpan di browser) dan filter "Favorit"
+- Tautan langsung ke lagu, contoh: `.../index.html#/lagu/komang`
+- Salin chord lengkap ke clipboard, tampilan cetak yang bersih
+- Dark mode dengan aksen hijau, responsif, dan ramah keyboard
+
+## Lagu yang tersedia
+Komang, Hati-Hati di Jalan, Sempurna, Evaluasi, Rumah ke Rumah, dan Akad. Progresi chord disusun dengan membandingkan beberapa referensi publik. Setiap lagu punya label akurasi:
+- **Cocok di beberapa referensi**: progresi sama di lebih dari satu sumber.
+- **Cek dengan telinga**: sebagian bagian hanya ditemukan di satu sumber atau sumbernya berbeda-beda.
+
+Chord tetap bisa berbeda dari rekaman asli, jadi cocokkan dengan telinga.
 
 ## Jalankan di komputer
 1. Download atau clone repository ini.
-2. Buka `index.html` di browser.
-
-Untuk pengalaman lokal yang lebih konsisten, gunakan ekstensi **Live Server** di VS Code, lalu pilih **Open with Live Server** pada `index.html`.
+2. Buka `index.html` di browser. Atau gunakan ekstensi **Live Server** di VS Code.
 
 ## Publikasikan lewat GitHub Pages
-1. Buat repository baru di GitHub, misalnya `chordiva`.
-2. Upload semua file di folder ini ke root repository: `index.html`, `styles.css`, `script.js`, dan `favicon.svg`.
-3. Buka **Settings → Pages**.
-4. Pada **Build and deployment**, pilih **Deploy from a branch**.
-5. Pilih branch `main` dan folder `/(root)`, lalu klik **Save**.
-6. Tunggu proses deployment selesai. URL website akan tampil di bagian Pages.
+1. Upload `index.html`, `styles.css`, `script.js`, `favicon.svg` ke root repository.
+2. Buka **Settings → Pages**, pilih **Deploy from a branch**, branch `main`, folder `/(root)`, lalu **Save**.
 
-## Tambah atau ubah data lagu
-Buka `script.js`, lalu edit array `songs` di bagian atas file. Contoh struktur data:
+## Menambah lagu
+Edit array `songs` di bagian atas `script.js`:
 
 ```js
 {
-  id: 7,
+  id: "judul-lagu",            // huruf kecil dan tanda hubung, dipakai untuk tautan
   title: "Judul Lagu",
   artist: "Nama Artis",
-  key: "G",
-  chords: ["G", "D", "Em", "C"],
-  snippet: "G – D – Em – C"
+  key: "G",                    // nada dasar dari BENTUK chord yang Anda tulis
+  capo: 0,                     // capo untuk bentuk chord tersebut (nada asli = key + capo)
+  level: "Pemula",
+  accuracy: "high",            // "high" atau "medium"
+  note: "Catatan opsional.",
+  sections: [
+    { name: "Intro",  lines: ["G D Em C"] },
+    { name: "Verse",  lines: ["G D", "Em C"] },
+    { name: "Chorus", lines: ["C G Am F", "Em ×2"] }
+  ]
 }
 ```
 
-**Penting:** data lagu dalam repository ini hanya data demo. Ganti dengan data chord yang sudah Anda buat sendiri atau yang penggunaannya sudah memperoleh izin yang sesuai. Lirik dan susunan chord tertentu bisa memiliki perlindungan hak cipta; pastikan hak publikasi sebelum mengunggah konten.
+Aturan data:
+- Satu string di `lines` adalah satu baris chord, dibaca kiri ke kanan.
+- Slash chord (`D/F#`), 7th (`Am7`), `maj7`, dan `add9` didukung. Semua ikut tertranspose, termasuk nada bass.
+- Token yang bukan chord (misalnya `×3`) tampil sebagai keterangan.
+- Contoh lagu yang dimainkan dengan capo: Akad ditulis dalam bentuk `G` dengan `capo: 2`, sehingga nada aslinya A.
 
-## Batasan versi awal
-- Data disimpan di dalam `script.js`, jadi belum ada database atau panel admin.
-- Chord yang tampil di detail lagu merupakan contoh pola, bukan transkripsi lagu yang akurat.
-- Pencarian hanya berjalan pada data yang sudah dimasukkan ke array.
-- Belum ada akun, favorit, sinkronisasi, atau auto-scroll.
+Diagram tersedia untuk chord terbuka umum dan chord barre mayor/minor/7/m7/maj7. Chord lain (misalnya `Cadd9` di posisi lain atau `sus`) akan menampilkan pesan "belum tersedia".
+
+## Catatan hak cipta
+Aplikasi ini hanya menyimpan progresi chord, bukan lirik. Lirik dan susunan chord lengkap bisa memiliki perlindungan hak cipta. Jika Anda menambahkan lirik atau transkripsi lengkap, pastikan Anda memiliki izin untuk mempublikasikannya.
+
+## Batasan saat ini
+- Data tersimpan di `script.js` (belum ada database atau panel admin).
+- Favorit hanya tersimpan di browser yang dipakai.
+- Belum ada akun atau sinkronisasi antar perangkat.
 
 ## Struktur file
-
 ```text
 chordiva/
 ├── index.html
